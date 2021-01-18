@@ -1,0 +1,21 @@
+{
+  "url": "https://example.com:8448",
+  "accessToken": "longstring",
+  "userId": "@user:example.com",
+  "lastUpdate": 0,
+  "rssRooms": [
+    {
+      "roomURL": "!Tsoriroisjgrio:example.com",
+      "emitter": [
+        {
+          "name": "example feed",
+          "url": "https://example.com/..."
+        },
+        {
+          "name": "example feed 2",
+          "url": "https://www.example.com/..."
+        }
+      ]
+    }
+  ]
+}
