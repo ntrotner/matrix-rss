@@ -1,6 +1,11 @@
 # RSS Bot
 This bot allows one to get RSS feed messages through the Matrix messenger protocol.
 
+## Requirements
+- `npm`
+- `npx`
+- `node`
+
 ## How to Run
 - Matrix GUI
   - Create user account on a server and add user id and 
