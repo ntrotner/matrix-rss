@@ -1,4 +1,4 @@
-import { rss_room } from "../interfaces/rss.interface";
+import { rss_room } from "../../interfaces/rss.interface";
 import { sendMessage } from "../matrix-lib/matrix-operations";
 import { get_rss_feed } from "./rss-handler";
 
@@ -21,13 +21,14 @@ export async function send_updates_from_rss(client: any, to_fetch: rss_room, las
 
       for (const rss_info of to_fetch.emitter) {
         try {
-          let resp = await get_rss_feed(rss_info.url, lastUpdated, rss_info.name);
-          if (resp) {
-            sendMessage(client, to_fetch.roomURL, resp);
-          }
-        } catch { }
+          const new_entries = await get_rss_feed(rss_info.url, lastUpdated, rss_info.name);
+          new_entries ? sendMessage(client, to_fetch.roomURL, new_entries) : null;
+        } catch (e) {
+          console.error(e);
+        }
       }
+
     });
     res('Done');
-  })
+  });
 }

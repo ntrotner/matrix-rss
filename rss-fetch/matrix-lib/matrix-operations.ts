@@ -12,7 +12,7 @@ export function sendMessage(client, roomId, body) {
 }
 
 /**
- * creates a matrix client and connects to it
+ * creates a matrix client and connects to server
  * 
  * @param baseUrl 
  * @param accessToken 
