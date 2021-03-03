@@ -1,6 +1,7 @@
 import { ISettings } from "../../interfaces/rss.interface";
 import fs from 'fs';
 import { HTMLElement, parse } from "node-html-parser";
+import { LAST_UPDATE } from "../../interfaces/constants";
 
 /**
  * get settings file
@@ -8,17 +9,14 @@ import { HTMLElement, parse } from "node-html-parser";
 export function readSettings(pathToSettings: string): ISettings {
   const loadedSettings = JSON.parse(fs.readFileSync(pathToSettings, 'utf8')) as ISettings;
   loadedSettings.hourInterval = loadedSettings.hourInterval <= 0 ? 1 : loadedSettings.hourInterval;
-  return loadedSettings
+  return loadedSettings;
 }
 
 /**
- * update timestamp of settings file
- *
- * @param settings
+ * update timestamp
  */
-export function updateTimestamp(settings: ISettings): void {
-  settings.lastUpdate = new Date().getTime();
-  fs.writeFile('../settings.json', JSON.stringify(settings), () => 0);
+export function updateTimestamp(): void {
+  localStorage.setItem(LAST_UPDATE, String(new Date().getTime()));
 }
 
 /**

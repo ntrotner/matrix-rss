@@ -54,6 +54,6 @@ The third one won't be filled, as the class isn't mentioned.
 - Docker support
 - ~~Make it possible to use rooms with encryption (as it is a core feature of Matrix)~~ (somehow working)
 - ~~Find a way to close the connection of the client after every message is sent~~ (connection is reused)
-- Find error on why the encoding of rss feeds isn't working right
-- Integrate timestamp anchor to local storage
+- Fix encoding issue of rss-parser
+- ~~Integrate timestamp anchor to local storage~~ (working)
 - ~~General testing for cross server usage~~ (working)
