@@ -1,32 +1,24 @@
-import { ISettings } from '../interfaces/rss.interface';
+import cron from "node-cron";
 import { createMatrixClient } from './matrix-lib/matrix-operations';
-import { send_updates_from_rss } from './rss-lib/rss-cronjob';
-var fs = require('fs');
-const cron = require('node-cron');
+import { sendUpdatesFromRSS } from './rss-lib/rss-cronjob';
+import { readSettings, updateTimestamp } from "./general-lib/file-controller";
 
-const settings: ISettings = require('../settings.json');
+const SETTINGS_PATH = '../settings.json'
+let connectedClient;
 
 /**
  * function that executes the fetch process for every server/feed
  */
-function run_cron() {
+async function runCron() {
+  const settings = readSettings(SETTINGS_PATH);
+  if (!connectedClient) connectedClient = await createMatrixClient(settings.loginUrl, settings.user, settings.password, settings.deviceId);
 
-  settings.servers.forEach((server) => {
+  Promise.all(settings.servers.map(async (server) =>
     // create client and connect to matrix
-    const client = createMatrixClient(server.url, settings.accessToken, settings.userId);
-
-    Promise.all(server.rssRooms.map((room) => send_updates_from_rss(client, room, settings.lastUpdate)))
-      .then((_) => {
-        settings.lastUpdate = new Date().getTime();
-        fs.writeFile('../settings.json', JSON.stringify(settings), () => { });
-      });
-  });
+    server.rssRooms.map((room) => sendUpdatesFromRSS(connectedClient, room, settings.lastUpdate)))
+  ).then(() => updateTimestamp(settings));
 }
 
-// check that interval isn't smaller/equal to 0
-const interval = settings.hourInterval <= 0 ? 1 : settings.hourInterval;
-
 // run every x hour (0 < x < infinity)
-cron.schedule(`0 */${Math.ceil(interval)} * * *`, () => run_cron());
-
-run_cron();
+cron.schedule(`0 */${Math.ceil(readSettings(SETTINGS_PATH).hourInterval)} * * *`, () => runCron());
+runCron();

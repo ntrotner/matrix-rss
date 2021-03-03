@@ -1,22 +1,28 @@
 {
-  "userId": "@user:matrix.example.com",
-  "accessToken": "",
+  "user": "",
+  "password": "",
+  "loginUrl": "https://matrix.org",
+  "deviceId": "main-rss",
   "hourInterval": 1,
   "lastUpdate": 0,
   "servers": [
     {
-      "url": "https://matrix.example.com:8448",
       "rssRooms": [
         {
-          "roomURL": "!GAzyngJvasbOrRgUGL:matrix.example.com",
+          "roomURL": "!jxyMhIKYGmaHmohqUk:matrix.org",
+          "emitter": [
+            {
+              "name": "Criminal Psychology",
+              "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCYwVxWpjeKFWwu8TML-Te9A"
+            }
+          ]
+        },
+        {
+          "roomURL": "!IcIoZSUSfwagRPbfRP:matrix.org",
           "emitter": [
             {
               "name": "Finanzen.net",
               "url": "https://www.finanzen.net/rss/news"
-            },
-            {
-              "name": "Criminal Psychology",
-              "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCYwVxWpjeKFWwu8TML-Te9A"
             }
           ]
         }

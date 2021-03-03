@@ -1,13 +1,14 @@
 export interface ISettings {
-  userId: string,
-  accessToken: string,
+  user: string,
+  password: string,
+  loginUrl: string,
+  deviceId: string,
   hourInterval: number,
   lastUpdate: number,
   servers: matrix_server[]
 }
 
 export interface matrix_server {
-  url: string,
   rssRooms: rss_room[]
 }
 

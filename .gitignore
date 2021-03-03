@@ -1,2 +1,2 @@
 node_modules
-docker run -d -v /home/niki/git/Matrix-RSS-Feed/:/matrix rssbot
+cryptoStorage

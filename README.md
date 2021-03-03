@@ -7,12 +7,9 @@ This bot allows one to get RSS feed messages through the Matrix messenger protoc
 - `node`
 
 ## How to Run
-- Matrix GUI
-  - Create user account on a server and add user id and 
-  [access token](https://webapps.stackexchange.com/questions/131056/how-to-get-an-access-token-for-riot-matrix) 
-  to the `settings.json`
+- Matrix
+  - Create user account on a server and add user and password to the `settings.json`
   - Create or join a room with that account
-  - Be sure that this room isn't encrypted, as the current version can't handle it
 - settings.json
   - Set the sync interval to rerun every x hours
   - Add a server and room url
@@ -55,7 +52,8 @@ The third one won't be filled, as the class isn't mentioned.
 
 ## TODO
 - Docker support
-- Make it possible to use rooms with encryption (as it is a core feature of Matrix)
-- Find a way to close the connection of the client after every messsage is sent
-- Default template improvements
-- General testing for cross server usage
+- ~~Make it possible to use rooms with encryption (as it is a core feature of Matrix)~~ (somehow working)
+- ~~Find a way to close the connection of the client after every message is sent~~ (connection is reused)
+- Find error on why the encoding of rss feeds isn't working right
+- Integrate timestamp anchor to local storage
+- ~~General testing for cross server usage~~ (working)
