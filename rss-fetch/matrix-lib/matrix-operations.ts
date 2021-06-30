@@ -1,9 +1,5 @@
-// @ts-ignore
-global.Olm = require('olm');
-
-const sdk = require('matrix-js-sdk')
+const sdk = require('matrix-js-sdk');
 const {LocalStorageCryptoStore} = require('matrix-js-sdk/lib/crypto/store/localStorage-crypto-store');
-
 
 /**
  * send html coded message to room
@@ -19,8 +15,8 @@ export function sendMessage(client, roomId, body): void {
     {
       msgtype: 'm.text',
       format: 'org.matrix.custom.html',
-      body: "",
-      formatted_body: body,
+      body: '',
+      formatted_body: body
     },
     ''
   );
@@ -35,22 +31,22 @@ export function sendMessage(client, roomId, body): void {
  * @param deviceId
  */
 export async function createMatrixClient(baseUrl: string, user: string, password: string, deviceId: string) {
-  return new Promise((res, rej) => {
+  return new Promise((resolve, reject) => {
     const client = sdk.createClient({
       baseUrl,
       deviceId,
       sessionStore: new sdk.WebStorageSessionStore(localStorage),
-      cryptoStore: new LocalStorageCryptoStore(localStorage),
+      cryptoStore: new LocalStorageCryptoStore(localStorage)
     });
 
-    client.login("m.login.password", {user, password})
+    client.login('m.login.password', {user, password})
       .then(() => {
         client.initCrypto()
           .then(() => {
-            client.startClient().then((_) => res(client));
+            client.startClient().then((_) => resolve(client));
           })
-          .catch(() => rej(undefined));
-      })
+          .catch(() => reject(undefined));
+      }).catch(() => reject(undefined)
+      );
   });
-
 }

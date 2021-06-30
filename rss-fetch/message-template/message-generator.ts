@@ -1,8 +1,8 @@
 import Parser from 'rss-parser';
-import path from "path";
+import path from 'path';
 import { loadHTMLFile } from '../general-lib/file-controller';
 
-const pathToHTML = path.join(__dirname, '../', '../', 'message-template.html');
+const pathToHTML = path.join(__dirname, '../', '../', '../', 'message-template.html');
 
 /**
  * generates a custom html with replaced contents
@@ -34,4 +34,3 @@ export function generateHTML(item: Parser.Item, feed: Parser.Output<any>) {
     return '';
   }
 }
-

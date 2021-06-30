@@ -1,6 +1,6 @@
-import { rss_room } from "../../interfaces/rss.interface";
-import { sendMessage } from "../matrix-lib/matrix-operations";
-import { getRSSFeed } from "./rss-handler";
+import { rssRoom } from '../../interfaces/rss.interface';
+import { sendMessage } from '../matrix-lib/matrix-operations';
+import { getRSSFeed } from './rss-handler';
 
 /**
  * request rss feed and send new items to room
@@ -9,14 +9,14 @@ import { getRSSFeed } from "./rss-handler";
  * @param toFetch
  * @param lastUpdated
  */
-export async function sendUpdatesFromRSS(client: any, toFetch: rss_room, lastUpdated: number) {
-  return new Promise((res, rej) => {
+export async function sendUpdatesFromRSS(client: any, toFetch: rssRoom, lastUpdated: number) {
+  return new Promise((resolve, reject) => {
     client.setGlobalErrorOnUnknownDevices(false);
     // if synced then proceed
-    client.once('sync', async (state, _, __) => {
+    client.once('sync', async(state, _, __) => {
       if (state !== 'PREPARED') {
-        console.error("CAN'T CONNECT TO MATRIX");
-        rej('Failed');
+        console.error('CAN\'T CONNECT TO MATRIX');
+        resolve('Failed');
         return;
       }
 
@@ -28,8 +28,7 @@ export async function sendUpdatesFromRSS(client: any, toFetch: rss_room, lastUpd
           console.error(e);
         }
       }
-
     });
-    res('Done');
+    resolve('Done');
   });
 }
