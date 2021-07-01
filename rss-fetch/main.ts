@@ -1,11 +1,10 @@
-// @ts-ignore
-global.Olm = require('olm');
 import path from 'path';
 import { createMatrixClient } from './matrix-lib/matrix-operations';
 import { sendUpdatesFromRSS } from './rss-lib/rss-cronjob';
 import { readSettings, updateTimestamp } from './general-lib/file-controller';
-import { LAST_UPDATE } from '../interfaces/constants';
-import { SETTINGS_PATH } from '../main';
+import { LAST_UPDATE, SETTINGS_PATH } from '../interfaces/constants';
+// @ts-ignore
+global.Olm = require('olm');
 
 // set localstorage for crypto storage
 global.localStorage = new (require('node-localstorage').LocalStorage)(path.join('./rss-fetch/matrix-lib/cryptoStorage'));
