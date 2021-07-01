@@ -3,7 +3,6 @@ import { generateHTML } from '../message-template/message-generator';
 
 const parser = new Parser();
 
-
 /**
  * returns string that are generated with the rss content
  *
@@ -11,7 +10,7 @@ const parser = new Parser();
  * @param lastUpdate unix timestamp
  * @param name
  */
-export function getRSSFeed(url: string, lastUpdate: number, name: string) {
+export function getRSSFeed(url: string, lastUpdate: number, name: string): Promise<string | boolean> {
   return parser.parseURL(url)
     .then((feed) => {
       let finalMessage = `\n<h2>${name}<h2>\n`;
@@ -19,7 +18,9 @@ export function getRSSFeed(url: string, lastUpdate: number, name: string) {
 
       if (filteredItems.length === 0) return false;
 
-      filteredItems.forEach(item => finalMessage += generateHTML(item, feed));
+      filteredItems.forEach((item) => {
+        finalMessage += generateHTML(item, feed);
+      });
       return finalMessage;
     });
 }
