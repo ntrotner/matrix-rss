@@ -23,5 +23,5 @@ export async function runCron() {
   Promise.all(settings.servers.map(async(server) =>
   // create client and connect to matrix
     server.rssRooms.map((room) => sendUpdatesFromRSS(connectedClient, room, Number(localStorage.getItem(LAST_UPDATE)))))
-  ).then(() => updateTimestamp()).catch(() => console.log('error'));
+  ).then(() => updateTimestamp()).catch(() => console.log('Couldn\'t send RSS updates'));
 }
